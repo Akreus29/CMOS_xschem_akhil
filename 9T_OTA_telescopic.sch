@@ -108,40 +108,45 @@ lab=#net4}
 N -200 -90 -120 -90 {
 lab=#net8}
 N 100 -90 180 -90 {
-lab=#net9}
+lab=#net8}
 N -330 150 -330 360 {
 lab=GND}
 N 300 150 300 360 {
 lab=GND}
+N -120 -90 100 -90 {lab=#net8}
+N 0 -90 -0 -50 {lab=#net8}
 C {ipin.sym} -340 90 0 0 {name=p1 lab=vplus}
 C {ipin.sym} 320 90 0 1 {name=p2 lab=vminus}
 C {opin.sym} 460 -240 0 0 {name=p3 lab=vout}
 C {capa.sym} 420 -210 0 0 {name=C1
 m=1
-value=10p
+value=3.2p
 footprint=1206
 device="ceramic capacitor"}
-C {vsource.sym} -60 -640 1 0 {name=V1 value=1.8 savecurrent=false}
+C {vsource.sym} -60 -640 1 0 {name=V1 value=3.6 savecurrent=false}
 C {gnd.sym} 0 360 0 0 {name=l1 lab=GND}
 C {lab_pin.sym} 0 -620 0 1 {name=p7 sig_type=std_logic lab=vdd}
 C {code_shown.sym} -1110 -640 0 0 {name=s1 only_toplevel=false value=".lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
 
 *.op
 *.tran 0.1n 100n
-.ac dec 100 1 200meg
+.ac dec 100 1 1e9
 
 * ----- Save all nets -----
-.save all"}
-C {vsource.sym} -120 300 0 0 {name=V2 value=1.8 savecurrent=false}
-C {vsource.sym} -120 -60 0 0 {name=V3 value=0.8 savecurrent=false}
-C {vsource.sym} 100 -60 0 0 {name=V4 value=0.8 savecurrent=false}
-C {gnd.sym} -120 -30 0 0 {name=l2 lab=GND}
-C {gnd.sym} 100 -30 0 0 {name=l3 lab=GND}
-C {vsource.sym} -330 120 0 0 {name=V5 value="DC 0.5 AC 1" savecurrent=false}
-C {vsource.sym} 300 120 0 0 {name=V6 value="DC 0.5 AC -1" savecurrent=false}
+.save all
+.control 
+  run
+  setplot ac1
+  plot vdb(vout)
+  plot vout vplus
+.endc"}
+C {vsource.sym} -120 300 0 0 {name=Vb2 value=0.6 savecurrent=false}
+C {gnd.sym} 0 10 0 0 {name=l3 lab=GND}
+C {vsource.sym} -330 120 0 0 {name=V5 value="dc 1 ac 1" savecurrent=false}
+C {vsource.sym} 300 120 0 0 {name=V6 value="dc 1 ac -1" savecurrent=false}
 C {sky130_fd_pr/nfet_01v8_lvt.sym} -260 90 0 0 {name=M1
-W=1
-L=0.15
+W=10
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -154,8 +159,8 @@ model=nfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8_lvt.sym} -20 270 0 0 {name=M2
-W=1
-L=0.15
+W=6
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -168,8 +173,8 @@ model=nfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8_lvt.sym} 240 90 0 1 {name=M3
-W=1
-L=0.15
+W=10
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -182,8 +187,8 @@ model=nfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8_lvt.sym} 200 -90 0 0 {name=M4
-W=1
-L=0.15
+W=6
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -196,8 +201,8 @@ model=nfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8_lvt.sym} -220 -90 0 1 {name=M5
-W=1
-L=0.15
+W=6
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -210,8 +215,8 @@ model=nfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8_lvt.sym} -220 -390 0 1 {name=M6
-W=1
-L=0.35
+W=16
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -224,8 +229,8 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8_lvt.sym} 200 -390 0 0 {name=M7
-W=1
-L=0.35
+W=16
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -238,8 +243,8 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8_lvt.sym} -220 -530 0 1 {name=M8
-W=1
-L=0.35
+W=18
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -252,8 +257,8 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8_lvt.sym} 200 -530 0 0 {name=M9
-W=1
-L=0.35
+W=18
+L=1
 nf=1
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
@@ -265,3 +270,4 @@ sa=0 sb=0 sd=0
 model=pfet_01v8_lvt
 spiceprefix=X
 }
+C {vsource.sym} 0 -20 0 0 {name=Vb1 value=1.8 savecurrent=false}
