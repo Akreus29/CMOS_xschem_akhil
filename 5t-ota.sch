@@ -102,7 +102,7 @@ C {ipin.sym} -390 110 0 0 {name=p5 lab=PLUS}
 C {opin.sym} 520 -40 0 0 {name=p6 lab=Vout}
 C {capa.sym} 420 60 0 0 {name=C1
 m=1
-value=1p
+value=1e-15
 footprint=1206
 device="ceramic capacitor"}
 C {lab_pin.sym} 460 10 2 0 {name=p12 sig_type=std_logic lab=Vout}
@@ -152,14 +152,14 @@ sa=0 sb=0 sd=0
 model=pfet_01v8
 spiceprefix=X
 }
-C {vsource.sym} -40 350 0 0 {name=V3 value=0.7 savecurrent=false}
+C {vsource.sym} -40 350 0 0 {name=V3 value=1.8 savecurrent=false}
 C {gnd.sym} -40 380 0 0 {name=l4 lab=GND}
 C {gnd.sym} 20 110 3 0 {name=l5 lab=GND}
 C {gnd.sym} 250 110 1 1 {name=l6 lab=GND}
 C {gnd.sym} 210 330 0 0 {name=l8 lab=GND}
 C {code_shown.sym} -620 -170 0 0 {name=s1 only_toplevel=false value=".lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
 
-.ac dec 100 1 200meg
+.ac dec 100 1 1e9
 
 * ----- Save all nets -----
 .save all
@@ -177,4 +177,4 @@ spiceprefix=X
 }
 C {vsource.sym} -240 140 0 0 {name=V1 value="dc 0.5 ac 1" savecurrent=false}
 C {vsource.sym} 460 140 0 0 {name=V2 value="dc 0.5 ac -1 " savecurrent=false}
-C {vsource.sym} 110 -220 1 0 {name=V4 value=1.8 savecurrent=false}
+C {vsource.sym} 110 -220 1 0 {name=V4 value=3.6 savecurrent=false}
