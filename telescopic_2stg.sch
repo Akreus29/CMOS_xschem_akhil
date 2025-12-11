@@ -37,13 +37,13 @@ N 220 -600 220 -560 {
 lab=vdd}
 N -240 -280 -80 -280 {
 lab=#net1}
-N -80 -280 -0 -280 {
+N -80 -280 0 -280 {
 lab=#net1}
-N 0 300 -0 360 {
+N 0 300 0 360 {
 lab=GND}
-N -100 360 -0 360 {
+N -100 360 0 360 {
 lab=GND}
-N -0 360 100 360 {
+N 0 360 100 360 {
 lab=GND}
 N -120 270 -40 270 {
 lab=#net7}
@@ -95,11 +95,11 @@ N -180 90 -180 190 {
 lab=#net6}
 N 160 90 160 190 {
 lab=#net6}
-N -0 270 40 270 {
+N 0 270 40 270 {
 lab=GND}
 N 40 270 40 360 {
 lab=GND}
-N 0 -390 -0 -280 {
+N 0 -390 0 -280 {
 lab=#net1}
 N 0 -530 0 -460 {
 lab=#net4}
@@ -114,7 +114,26 @@ lab=GND}
 N 300 150 300 360 {
 lab=GND}
 N -120 -90 100 -90 {lab=#net8}
-N 0 -90 -0 -50 {lab=#net8}
+N 0 -90 0 -50 {lab=#net8}
+N 450 -240 450 -190 {lab=vout}
+N 450 -190 490 -190 {lab=vout}
+N 490 -190 490 -150 {lab=vout}
+N 490 -150 560 -150 {lab=vout}
+N 600 -120 600 360 {lab=GND}
+N 410 360 600 360 {lab=GND}
+N 600 -150 620 -150 {lab=GND}
+N 620 -150 620 -120 {lab=GND}
+N 600 -120 620 -120 {lab=GND}
+N 450 -380 560 -380 {lab=vout}
+N 450 -380 450 -240 {lab=vout}
+N 600 -600 600 -410 {lab=vdd}
+N 340 -600 600 -600 {lab=vdd}
+N 600 -380 620 -380 {lab=vdd}
+N 620 -410 620 -380 {lab=vdd}
+N 600 -410 620 -410 {lab=vdd}
+N 600 -350 600 -180 {lab=vout2}
+N 600 -240 650 -240 {lab=vout2}
+N 650 -240 740 -240 {lab=vout2}
 C {ipin.sym} -340 90 0 0 {name=p1 lab=vplus}
 C {ipin.sym} 320 90 0 1 {name=p2 lab=vminus}
 C {opin.sym} 460 -240 0 0 {name=p3 lab=vout}
@@ -126,7 +145,7 @@ device="ceramic capacitor"}
 C {vsource.sym} -60 -640 1 0 {name=V1 value=3.6 savecurrent=false}
 C {gnd.sym} 0 360 0 0 {name=l1 lab=GND}
 C {lab_pin.sym} 0 -620 0 1 {name=p7 sig_type=std_logic lab=vdd}
-C {code_shown.sym} -1130 -640 0 0 {name=s1 only_toplevel=false value=".lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+C {code_shown.sym} -1150 -640 0 0 {name=s1 only_toplevel=false value=".lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
 
 *.op
 *.tran 0.1n 100n
@@ -137,8 +156,8 @@ C {code_shown.sym} -1130 -640 0 0 {name=s1 only_toplevel=false value=".lib /usr/
 .control 
   run
   setplot ac1
-  plot vdb(vout)
-  plot vout vplus
+  plot vdb(vout2)
+  plot vout2 vplus
 .endc"}
 C {vsource.sym} -120 300 0 0 {name=Vb2 value=0.6 savecurrent=false}
 C {gnd.sym} 0 10 0 0 {name=l3 lab=GND}
@@ -271,3 +290,32 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {vsource.sym} 0 -20 0 0 {name=Vb1 value=1.8 savecurrent=false}
+C {sky130_fd_pr/nfet_01v8_lvt.sym} 580 -150 0 0 {name=M10
+W=6
+L=1
+nf=1
+mult=1
+ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
+pd="expr('2*int((@nf + 1)/2) * (@W / @nf + 0.29)')"
+as="expr('int((@nf + 2)/2) * @W / @nf * 0.29')"
+ps="expr('2*int((@nf + 2)/2) * (@W / @nf + 0.29)')"
+nrd="expr('0.29 / @W ')" nrs="expr('0.29 / @W ')"
+sa=0 sb=0 sd=0
+model=nfet_01v8_lvt
+spiceprefix=X
+}
+C {sky130_fd_pr/pfet_01v8_lvt.sym} 580 -380 0 0 {name=M11
+W=16
+L=1
+nf=1
+mult=1
+ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
+pd="expr('2*int((@nf + 1)/2) * (@W / @nf + 0.29)')"
+as="expr('int((@nf + 2)/2) * @W / @nf * 0.29')"
+ps="expr('2*int((@nf + 2)/2) * (@W / @nf + 0.29)')"
+nrd="expr('0.29 / @W ')" nrs="expr('0.29 / @W ')"
+sa=0 sb=0 sd=0
+model=pfet_01v8_lvt
+spiceprefix=X
+}
+C {opin.sym} 740 -240 0 0 {name=p4 lab=vout2}
