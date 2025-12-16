@@ -183,8 +183,8 @@ device="ceramic capacitor"}
 C {vsource.sym} 90 -280 1 0 {name=V1 value=2.5 savecurrent=false}
 C {gnd.sym} 60 -280 1 0 {name=l1 lab=GND}
 C {isource.sym} -380 50 0 1 {name=I0 value=30u}
-C {vsource.sym} -280 160 0 0 {name=V2 value="dc 1 ac 2" savecurrent=false}
-C {vsource.sym} 230 160 0 0 {name=V3 value="dc 1 ac -2" savecurrent=false}
+C {vsource.sym} -280 160 0 0 {name=V2 value="dc 1 ac 1.5" savecurrent=false}
+C {vsource.sym} 230 160 0 0 {name=V3 value="dc 1 ac -1.5" savecurrent=false}
 C {gnd.sym} 230 190 0 0 {name=l2 lab=GND}
 C {gnd.sym} -280 190 0 0 {name=l3 lab=GND}
 C {vsource.sym} -10 450 0 0 {name=V4 value="-2.5" savecurrent=false}
@@ -210,7 +210,7 @@ C {code_shown.sym} -1150 -240 0 0 {name=s1 only_toplevel=false value=".lib /usr/
 C {opin.sym} 190 10 3 0 {name=p3 lab=vout1}
 C {capa.sym} 440 40 0 0 {name=C2
 m=1
-value=10p
+value=9p
 footprint=1206
 device="ceramic capacitor"}
 C {gnd.sym} -150 130 0 0 {name=l5 lab=GND}
